@@ -1,0 +1,141 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1"><title>Backing up to the cloud for cheap - Claudio Spiess</title><meta property="og:title" content="Backing up to the cloud for cheap - Claudio Spiess"><meta property="og:type" content="article"><meta property="og:image" content="img/profile.jpg"><meta property="og:url" content="https://claudiosv.github.io/blog/backing-up-to-the-cloud-for-cheap/"><meta property="og:description" content="TEST"><meta name=Description property="description" content="TEST"><link rel=stylesheet href=https://claudiosv.github.io/blog/css/style.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link href=https://claudiosv.github.io/blog/index.xml type=application/atom+xml rel=alternate title="Sitewide Atom feed"><meta name=theme-color content="#ffffff"><script>function updateMode(){localStorage.theme==="dark"||!("theme"in localStorage)&&window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark")}function toggleMode(){localStorage.theme==="dark"?localStorage.theme="light":localStorage.theme="dark",updateMode()}window.onload=updateMode();function toggleMenu(){let e=document.getElementById("navbar-default");e.classList.contains("hidden")?e.classList.remove("hidden"):e.classList.add("hidden")}</script></head><body><header class="md:px-0 px-2"><nav><div class="container flex flex-wrap justify-between items-center mx-auto"><div class="nav-main my-2.5"></div><button type=button onclick=toggleMenu() class="inline-flex items-center p-2 ml-3
+text-sm text-gray-500
+rounded-lg md:hidden hover:bg-gray-100
+focus:outline-none focus:ring-2
+focus:ring-gray-200 dark:text-gray-400
+dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls=navbar-default aria-expanded=false>
+<span class=sr-only>Open main menu</span><svg class="w-6 h-6" aria-hidden="true" fill="currentcolor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4A1 1 0 013 5zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg></button><div class="hidden w-full md:block md:w-auto" id=navbar-default><ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5"><li class="p-2.5 md:first:pl-0 md:border-none border-b dark:border-zinc-500 list-none"><a class="text-zinc-600 dark:text-zinc-300
+hover:border-b-0" href=/blog/>Home</a></li><li class="p-2.5 md:first:pl-0 md:border-none border-b dark:border-zinc-500 list-none"><a class="text-zinc-600 dark:text-zinc-300
+hover:border-b-0" href=/blog/post/>Posts</a></li><li class="h-7 pl-2.5 pr-0 list-none"><button type=button onclick=toggleMode() class=h-full aria-label="Toggle between dark and light mode">
+<img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id=ligh-mode-button-img alt="A sun icon for switching to light mode" src=https://claudiosv.github.io/blog/img/light_mode.svg>
+<img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id=dark-mode-button-img alt="A moon icon for switching to dark mode" src=https://claudiosv.github.io/blog/img/dark_mode.svg></button></li></ul></div></div></nav></header><main class="content h-card container mt-2 m-auto
+leading-loose md:px-0 px-2 z-0" role=main><article class="article h-entry" itemprop=mainEntity itemscope itemtype=http://schema.org/BlogPosting><div class=title-container><h1 class="article-title p-name" itemprop=name>Backing up to the cloud for cheap</h1><div class="flex justify-between items-center"><a class="text-lg text-gray-600 dark:text-gray-400 border-none u-url" href=https://claudiosv.github.io/blog/backing-up-to-the-cloud-for-cheap/><time itemprop=datePublished class=dt-published datetime=2021-03-10T09:32:00+0100 content="2021-03-10T09:32:00+0100">2021.03.10</time></a>
+<a class="text-gray-600 dark:text-gray-400 text-right border-none p-author h-card" rel=author href=https://claudiosv.github.io/blog/ itemprop=author itemscope itemtype=http://schema.org/Person><span itemprop=name>Claudio V. Spieß</span></a></div></div><div class="article-content e-content" itemprop=articleBody><h2 id=motivation>Motivation</h2><p>In 2013 I was setting up an Ubuntu dualboot environment, accidentally selected the wrong partition, and saw it immediatly be deleted from the partition table, instantly erasing 300GB worth of data. While I could have recovered most of it with a tool like Recuva, I instead swallowed my pride and accepted this as a lesson: you need a backup. Having had external drives fail on me before, I since longed for a more disaster proof solution that would give me the flexibility I needed.</p><p>Backblaze was my first attempt, but it requires you reattach external drives every 30 days, which given my nomadic lifestyle and the offsite nature of the backup drive was an unrealistic burden. Not only this, but the pricing is per device, and not by the gigabyte.</p><p>So I found a different solution.</p><h2 id=1-pick-a-cloud-provider>1. Pick a cloud provider</h2><p>If you already have a provider with a high storage cap, such as Google Drive, OneDrive, Dropbox, or don&rsquo;t mind paying AWS, then that&rsquo;s fine: substitute the rest of this tutorial with these.</p><p>I ran the numbers and for a low amount of data influx (think 10gb a month), Backblaze B2 is definitely cheaper than even AWS Glacier, if you consider that to access your Glacier you need to pay a hefty extraction fee. Interestingly, it seems to be because Glacier data is stored on tape and a <em>physical robot</em> has to fetch the tape and put it in the reader.</p><p>Let me show you:</p><pre tabindex=0><code>500gb of data to backup
+10gb of new data per month
+no deleting and no downloading regularly, except once in disaster
+
+1gb costs 0.005 to upload or download
+500 * 0.005 = $2.50
+10 * 0.005 = $0.05
+for one year: 2.55 * 12 = $30.6
+cost of disaster one year in: 620*0.005 = $3.1
+
+total cost: $33.7
+
+backblaze claims that the same will cost $142 with AWS, $122 with Azure, and $136 with GCP, and that seems realistic given my own calculations
+</code></pre><p>No brainer.</p><h2 id=2-set-up-rclone>2. Set up rclone</h2><p>rclone is an open source tool written in Go that is essentially rsync (a unix tool for syncing filesystems) but for cloud providers. It supports many, even unexpected ones like Google Photos. rclone will take care of synchronizing our local filesystem with the one in the cloud, only uploading the delta. This makes backups really fast.</p><p>For macOS, assuming you already have <a href=https://brew.sh>brew</a>, simply run <code>brew install rclone</code> in the terminal.</p><h2 id=3-connect-your-cloud>3. Connect your cloud</h2><p>rclone needs to have a valid token for each cloud service, so it can interact with the file system. On some cloud systems you will first need to create a bucket or the equivalent storage block. rclone works with the concept of &ldquo;remotes&rdquo;, and in some cases they are <em>stackable</em>, so we will be creating a remote for our bucket, and then a &ldquo;secret&rdquo; remote that is connected to the bucket. To achieve this, let&rsquo;s first create a Backblaze account and create a bucket and tokens.</p><ol><li>Create an account at <a href=https://secure.backblaze.com/user_overview.htm>Backblaze</a>.</li><li>In the left menu, click Buckets and create a bucket with a random name. I used 1Password to generate a phrase password, like &ldquo;horse-cookie-serendipity-pool&rdquo;. Make sure this bucket is <em>Private</em>, encryption is disabled (since we will be using rclone to encrypt), and object lock is disabled.</li><li>Go to App Keys and add a new application key. For extra safety, restrict it to the bucket you just created. Ensure you authorise reading & writing, and leave the prefix and duration blank. Note the keyID and applicationKey, remember this is sensitive data.</li><li>To keep the keys we are going to save in our local filesystem, in <code>~/.config/rclone/rclone.conf</code>, secure we need to run <code>rclone config</code> and enter <code>s</code> and then <code>a</code> to set a config encryption password. Use a long, secure password, as this config will contain the keys to the kingdom. I used 1Password.</li><li>We are going to create an rclone remote called &ldquo;remote&rdquo;. Run <code>rclone config</code> and then follow this:</li></ol><pre tabindex=0><code>No remotes found - make a new one
+n) New remote
+q) Quit config
+n/q&gt; n
+name&gt; remote
+Type of storage to configure.
+Choose a number from below, or type in your own value
+[snip]
+XX / Backblaze B2
+   \ &#34;b2&#34;
+[snip]
+Storage&gt; b2
+</code></pre><p>Now comes the Backblaze specific part. Careful not to confuse your keyID and your applicationKey.</p><pre tabindex=0><code>Account ID or Application Key ID
+account&gt; -- THIS IS YOUR keyID --
+Application Key
+key&gt; -- THIS IS YOUR applicationKey --
+Endpoint for the service - leave blank normally.
+endpoint&gt;
+Remote config
+--------------------
+[remote]
+account = 123456789abc
+key = 0123456789abcdef0123456789abcdef0123456789
+endpoint =
+--------------------
+y) Yes this is OK
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt; y
+</code></pre><ol start=5><li>Great, now check that you can see your empty bucket: <code>rclone ls remote:name-of-your-bucket</code>. If there&rsquo;s an error, make sure you didn&rsquo;t confuse the keyID and the applicationKey.</li><li>Let&rsquo;s create the encrypted remote now called &ldquo;secret&rdquo;, by running <code>rclone config</code> again or if you&rsquo;re already in rclone, adding a new remote.</li></ol><pre tabindex=0><code>n) New remote
+s) Set configuration password
+q) Quit config
+n/s/q&gt; n
+name&gt; secret
+Type of storage to configure.
+Enter a string value. Press Enter for the default (&#34;&#34;).
+Choose a number from below, or type in your own value
+[snip]
+XX / Encrypt/Decrypt a remote
+   \ &#34;crypt&#34;
+[snip]
+Storage&gt; crypt
+** See help for crypt backend at: https://rclone.org/crypt/ **
+
+Remote to encrypt/decrypt.
+Normally should contain a &#39;:&#39; and a path, eg &#34;myremote:path/to/dir&#34;,
+&#34;myremote:bucket&#34; or maybe &#34;myremote:&#34; (not recommended).
+Enter a string value. Press Enter for the default (&#34;&#34;).
+</code></pre><p>Now enter the name of your bucket</p><pre tabindex=0><code>remote&gt; remote:name-of-your-bucket
+How to encrypt the filenames.
+Enter a string value. Press Enter for the default (&#34;standard&#34;).
+Choose a number from below, or type in your own value
+ 1 / Encrypt the filenames see the docs for the details.
+   \ &#34;standard&#34;
+ 2 / Very simple filename obfuscation.
+   \ &#34;obfuscate&#34;
+ 3 / Don&#39;t encrypt the file names.  Adds a &#34;.bin&#34; extension only.
+   \ &#34;off&#34;
+</code></pre><p>Here you must decide if you want to encrypt file names. As my filenames are not very sensitive, I chose &ldquo;off&rdquo;. Your choice.</p><pre tabindex=0><code>filename_encryption&gt;
+Option to either encrypt directory names or leave them intact.
+
+NB If filename_encryption is &#34;off&#34; then this option will do nothing.
+Enter a boolean value (true or false). Press Enter for the default (&#34;true&#34;).
+Choose a number from below, or type in your own value
+ 1 / Encrypt directory names.
+   \ &#34;true&#34;
+ 2 / Don&#39;t encrypt directory names, leave them intact.
+   \ &#34;false&#34;
+directory_name_encryption&gt;
+Password or pass phrase for encryption.
+</code></pre><p>Choose a secure password. I generated one in 1Password, but you may choose the let rclone generate one for you.</p><pre tabindex=0><code>y) Yes type in my own password
+g) Generate random password
+y/g&gt; y
+Enter the password:
+password:
+Confirm the password:
+password:
+Password or pass phrase for salt. Optional but recommended.
+Should be different to the previous password.
+y) Yes type in my own password
+g) Generate random password
+n) No leave this optional password blank (default)
+y/g/n&gt; g
+</code></pre><p>Choose a secure password and <em>do not lose it</em> or you can never recover your files!</p><pre tabindex=0><code>Password strength in bits.
+64 is just about memorable
+128 is secure
+1024 is the maximum
+Bits&gt; 128
+Your password is: JAsJvRcgR-_veXNfy_sGmQ # DON&#39;T LOSE THIS
+Use this password? Please note that an obscured version of this
+password (and not the password itself) will be stored under your
+configuration file, so keep this generated password in a safe place.
+y) Yes (default)
+n) No
+y/n&gt;
+Edit advanced config? (y/n)
+y) Yes
+n) No (default)
+y/n&gt;
+Remote config
+--------------------
+[secret]
+type = crypt
+remote = remote:name-of-your-bucket
+password = *** ENCRYPTED ***
+password2 = *** ENCRYPTED ***
+--------------------
+y) Yes this is OK (default)
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt;
+</code></pre><ol start=7><li>Ready for take off 🚀 Let&rsquo;s start the backup process:</li></ol><pre tabindex=0><code>rclone sync -P --stats-log-level &#34;ERROR&#34; --skip-links --exclude &#34;.DS_Store&#34; --exclude &#34;.Trashes&#34; /Volumes/MY-DRIVE/ secret:/Backups/
+</code></pre><p>You can also wrap the command so it doesn&rsquo;t get interrupted and get a log file with the errors:</p><pre tabindex=0><code>setsid [command] --log-file rclone.log &amp;&gt;/dev/null
+</code></pre><p>You can exclude more folders or file types using the <code>--exclude</code> flag. If you&rsquo;re not ready to star the upload, run the command with the <code>--dry-run</code> flag.</p><h2 id=what-to-do-in-emergency>What to do in emergency</h2><p>You can copy to your rclone config to a secure space such as 1Password, and if you need your files on another machine for example, place the config in the correct location and run <code>rclone sync secret:/Backups/ /path/to/local/folder</code> to download your files from your cloud to your local file system. If you don&rsquo;t keep the rclone config, you will need to set up your remotes all over again.</p><h3 id=fin>Fin</h3><p>Thanks for reading, I hope this was useful to someone adn if you ever have any questions you&rsquo;re welcome to ping me.</p></div><div class="text-neutral-500 mb-4">Last modified <span itemprop=dateModified datetime=2021-03-10T09:32:00+0100 content="2021-03-10T09:32:00+0100">2021.03.10</span></div></article></main><footer class="footer container h-10 text-center mt-1"><hr class=my-4><ul class="pl-0 mt-1"><li class="ml-2 first:before:content-none before:content-['•']
+inline-block list-none">Made with ❤️ in Davis</li><li class="ml-2 first:before:content-none before:content-['•']
+text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class=ml-2>© Claudio Spiess 2023</span></li></ul></footer></body></html>

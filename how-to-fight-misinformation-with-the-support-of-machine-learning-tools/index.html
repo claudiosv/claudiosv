@@ -1,0 +1,176 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1"><title>How to fight misinformation with the support of machine learning tools? - Claudio Spiess</title><meta property="og:title" content="How to fight misinformation with the support of machine learning tools? - Claudio Spiess"><meta property="og:type" content="article"><meta property="og:image" content="img/profile.jpg"><meta property="og:url" content="https://claudiosv.github.io/blog/how-to-fight-misinformation-with-the-support-of-machine-learning-tools/"><meta property="og:description" content="TEST"><meta name=Description property="description" content="TEST"><link rel=stylesheet href=https://claudiosv.github.io/blog/css/style.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link href=https://claudiosv.github.io/blog/index.xml type=application/atom+xml rel=alternate title="Sitewide Atom feed"><meta name=theme-color content="#ffffff"><script>function updateMode(){localStorage.theme==="dark"||!("theme"in localStorage)&&window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark")}function toggleMode(){localStorage.theme==="dark"?localStorage.theme="light":localStorage.theme="dark",updateMode()}window.onload=updateMode();function toggleMenu(){let e=document.getElementById("navbar-default");e.classList.contains("hidden")?e.classList.remove("hidden"):e.classList.add("hidden")}</script></head><body><header class="md:px-0 px-2"><nav><div class="container flex flex-wrap justify-between items-center mx-auto"><div class="nav-main my-2.5"></div><button type=button onclick=toggleMenu() class="inline-flex items-center p-2 ml-3
+text-sm text-gray-500
+rounded-lg md:hidden hover:bg-gray-100
+focus:outline-none focus:ring-2
+focus:ring-gray-200 dark:text-gray-400
+dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls=navbar-default aria-expanded=false>
+<span class=sr-only>Open main menu</span><svg class="w-6 h-6" aria-hidden="true" fill="currentcolor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4A1 1 0 013 5zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg></button><div class="hidden w-full md:block md:w-auto" id=navbar-default><ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5"><li class="p-2.5 md:first:pl-0 md:border-none border-b dark:border-zinc-500 list-none"><a class="text-zinc-600 dark:text-zinc-300
+hover:border-b-0" href=/blog/>Home</a></li><li class="p-2.5 md:first:pl-0 md:border-none border-b dark:border-zinc-500 list-none"><a class="text-zinc-600 dark:text-zinc-300
+hover:border-b-0" href=/blog/post/>Posts</a></li><li class="h-7 pl-2.5 pr-0 list-none"><button type=button onclick=toggleMode() class=h-full aria-label="Toggle between dark and light mode">
+<img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id=ligh-mode-button-img alt="A sun icon for switching to light mode" src=https://claudiosv.github.io/blog/img/light_mode.svg>
+<img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id=dark-mode-button-img alt="A moon icon for switching to dark mode" src=https://claudiosv.github.io/blog/img/dark_mode.svg></button></li></ul></div></div></nav></header><main class="content h-card container mt-2 m-auto
+leading-loose md:px-0 px-2 z-0" role=main><article class="article h-entry" itemprop=mainEntity itemscope itemtype=http://schema.org/BlogPosting><div class=title-container><h1 class="article-title p-name" itemprop=name>How to fight misinformation with the support of machine learning tools?</h1><div class="flex justify-between items-center"><a class="text-lg text-gray-600 dark:text-gray-400 border-none u-url" href=https://claudiosv.github.io/blog/how-to-fight-misinformation-with-the-support-of-machine-learning-tools/><time itemprop=datePublished class=dt-published datetime=2019-12-06T14:21:12-0400 content="2019-12-06T14:21:12-0400">2019.12.06</time></a>
+<a class="text-gray-600 dark:text-gray-400 text-right border-none p-author h-card" rel=author href=https://claudiosv.github.io/blog/ itemprop=author itemscope itemtype=http://schema.org/Person><span itemprop=name>Claudio V. Spieß</span></a></div></div><div class="article-content e-content" itemprop=articleBody><p>Note: This was originally written by me & submitted to the Technical University of Munich as an entrance essay.</p><h1 id=motivation>Motivation</h1><p>The election of American president Donald J. Trump in 2016 propelled
+misinformation, often called “fake news”, into the mainstream discourse.
+The revelation that Russian troll farms and media outlets produced
+misinformation that supported Trump and undermined his opponents shocked
+American voters [1], [2]. This example demonstrates the the need for
+effective, preventive means to avoid misinformation.</p><p>This text considers misinformation, referred to as &ldquo;fake news&rdquo;, as false
+or inaccurate information, that is spread for various purposes,
+intentionally deceptive, and presented in the form of propaganda. Fake
+news can used as a rhetorical trick to achieve political goals, such as
+undermining foreign states or winning an election. For example, Russian
+intelligence used Twitter, Facebook [3], and other forms of media to
+influence the US election [4]. The &ldquo;Pizzagate shooter&rdquo; exemplifies the
+extreme consequences of misinformation: a man named Edgar M. Welch
+attempted to enter a non-existent pizzeria basement in search of a child
+molestation dungeon, that never existed [5]. However, detecting
+misinformation is a non-trivial task both manually and algorithmically
+[6]. Even highly qualified machine learning engineers at Facebook
+struggle with their platform’s misinformation issues [7]. Fortunately,
+misinformation is spread publicly, and therefore data to mine is readily
+available through public sources like Twitter. With this data, machine
+learning (ML) methods can be developed, applied, and tested to identify
+and thwart misinformation.</p><h1 id=problem-statement>Problem Statement</h1><p>The goal of this essay is to highlight existing machine learning
+approaches that tackle the problem of misinformation. Developing such
+tools is an important responsibility due to the far-reaching
+consequences of misinformation. It is difficult for people to tell the
+difference between true and false information [8], therefore we should
+apply machine learning tools to help. Since machines process data at a
+faster rate than humans, machine learning models are better able to
+detect nuanced patterns that expose deceptive media.</p><h1 id=approach>Approach</h1><p>The approach used in this essay is to consult academic papers and web
+sites to find machine learning approaches that are promising and worth
+investigating because they contribute to solve the problem described
+above. The here proposed solutions are taken from academic papers and
+web sites. The results from the research papers must be compared taking
+into account the differences in their data sets and evaluation metrics.
+For example, many studies create their own data set, which makes it
+difficult to compare studies. Some studies, with common data sets, may
+only provide certain evaluation metrics like precision, but may leave
+out other useful metrics such as the F1 score.</p><p>Moreover, as a source I also consider the &ldquo;Fake News Challenge&rdquo; (FNC-1),
+which was created by academics and practitioners in response to the
+difficulties of misinformation detection [9].</p><h1 id=results--discussion>Results & Discussion</h1><p>Artificial neural networks (ANNs) have several advantages and
+disadvantages. The main advantages are as follows. 1) Generally
+speaking, ANNs improve with more data. 2) They are more flexible (e.g.
+can be used for classification and regression problems as well as
+unsupervised, semi-supervised, and supervised learning). 3) ANNs do not
+require as much feature-engineering as more traditional ML approaches 4)
+Lastly, inference is fast with a trained model. The following are
+disadvantages of ANNs. 1) It is a “black box” algorithm, meaning that it
+is difficult to understand how the model arrives at a particular output
+[10]. However, work has been done on this problem in the context of
+misinformation, such as that of O’Brien et al. [11], which was able to
+reveal words that were more commonly associated with fake news than real
+news. Additionally, many ANN configurations can require 2) large amounts
+of computational power to train and 3) large amounts of data to minimise
+the error.</p><p>A 2015 survey by Conroy [12] found two broad categories of methods:
+linguistic approaches, in which language patterns are analysed for
+deception, and network approaches, in which network information such as
+message metadata provide aggregate deception measures. There are a
+couple of common linguistic data sets for this research, which include
+<em>LIAR</em> by Wang et al. [13], based on data scraped from political
+fact-checking site Politifact, and the FNC-1 dataset. Common data sets
+make the comparison of approach performances easier. For this reason, I
+have excluded allegedly better-performing works that use other data
+sets.</p><p>The only metric shared by all works is accuracy. The accuracy of a model
+is calculated as the ratio of correct predictions over the total number
+of predictions. We have seen the performance, measured in terms of
+accuracy, of models on the Wang data set go from 44.87% [14] to
+48.5%[15], and up to 73.8% in 2018 [16]. The FNC-1 advanced the
+state of the art rapidly, from a 79.53% accuracy baseline from the
+competition organisers, increasing to 85.2% [17], to 89% [18], and
+up to 94.31% [19] accuracy. Ultimately, the FNC-1 was won by Cisco
+Systems (Talos Group) [20] with an approach that averaged outputs of
+decision trees and a deep convolutional neural network.</p><p>The common thread in these well-performing models is the use of neural
+networks. According to Zeng [17], all neural network models surveyed
+outperform the hand-crafted feature-based systems like Support Vector
+Machines. In 2019, Cardoso [21] surveyed the state of the art and
+concluded that network analysis approaches are more successful.</p><p>Fighting misinformation can be achieved by deploying machine learning
+models strategically in various tools. This can be done to inform
+readers about the credibility of information sources. Knowing whether a
+given piece of media is truthful or not can impact how a reader
+interprets a piece of media. For example, a browser extension could be
+developed that informs a user whether or not an article or piece of
+media is truthful or deceptive. It could embed the inferences of a
+neural network into every page the user visits. Another application
+could be implemented by social media platforms such as Facebook to
+filter out ads considered deceptive and augment media posted by users
+with a truthfulness indicator. There are certainly many more ways
+machine learning tools can be used to fight misinformation.</p><h1 id=conclusions>Conclusions</h1><p>Based on the surveyed literature, I conclude that misinformation can be
+detected on a &ldquo;good enough&rdquo; basis. I argue that linguistic approaches
+using neural networks are the most effective tools currently available.
+Yet, these algorithms are not perfect, and suffer from problems such as
+the black box problem. Other approaches I evaluated had significant
+problems, for example network-based approaches suffer since they can
+only be applied reactively after a piece of misinformation has spread
+and the data has been collected. Therefore, I propose to further
+investigate linguistic approaches as a proactive tool. In conclusion,
+misinformation can successfully be fought with the support of machine
+learning tools by deploying neural networks trained to detect it. The
+state of the art in detecting misinformation (on a particular data set)
+is at an accuracy of 94.31% [19], which makes it more than &ldquo;good
+enough&rdquo; for possible applications. Considering the advantages and
+disadvantages, I think that neural networks represent a promising tool
+to fight misinformation in our time.</p><h1 id=references>References</h1><p>[1] J. Downie, “What really disturbs voters about russia’s election
+interference,” <em>The Washington Post</em>. WP Company, Jul-2018 [Online].
+Available:
+<a href=https://www.washingtonpost.com/blogs/post-partisan/wp/2018/07/22/what-really-disturbs-voters-about-russias-election-interference/>https://www.washingtonpost.com/blogs/post-partisan/wp/2018/07/22/what-really-disturbs-voters-about-russias-election-interference/</a>.
+[Accessed: 23-Apr-2019]</p><p>[2] Greene, “Senate report: Moscow directed ’troll farm’ in efforts to
+elect trump,” <em>The Next Web</em>. Dec-2018 [Online]. Available:
+<a href=https://thenextweb.com/politics/2018/12/17/senate-report-moscow-directed-troll-farm-in-efforts-to-elect-trump/>https://thenextweb.com/politics/2018/12/17/senate-report-moscow-directed-troll-farm-in-efforts-to-elect-trump/</a>.
+[Accessed: 23-Apr-2019]</p><p>[3] C. W. Andrew Weisburd, “How russia dominates your twitter feed to
+promote lies (and, trump, too),” <em>The Daily Beast</em>. The Daily Beast
+Company, Aug-2016 [Online]. Available:
+<a href=https://www.thedailybeast.com/how-russia-dominates-your-twitter-feed-to-promote-lies-and-trump-too>https://www.thedailybeast.com/how-russia-dominates-your-twitter-feed-to-promote-lies-and-trump-too</a>.
+[Accessed: 23-Apr-2019]</p><p>[4] A. Watkins, “Intel officials believe russia spreads fake news,”
+<em>BuzzFeed News</em>. BuzzFeed News, Nov-2016 [Online]. Available:
+<a href=https://www.buzzfeednews.com/article/alimwatkins/intel-officials-believe-russia-spreads-fake-news>https://www.buzzfeednews.com/article/alimwatkins/intel-officials-believe-russia-spreads-fake-news</a>.
+[Accessed: 23-Apr-2019]</p><p>[5] C. K. Goldman and Adam, “In washington pizzeria attack, fake news
+brought real guns,” <em>The New York Times</em>. The New York Times, Dec-2016
+[Online]. Available:
+<a href=https://www.nytimes.com/2016/12/05/business/media/comet-ping-pong-pizza-shooting-fake-news-consequences.html>https://www.nytimes.com/2016/12/05/business/media/comet-ping-pong-pizza-shooting-fake-news-consequences.html</a>.
+[Accessed: 23-Apr-2019]</p><p>[6] D. Oberhaus, “Teaching machines to detect fake news is really
+hard,” <em>Motherboard</em>. VICE, May-2017 [Online]. Available:
+<a href=https://motherboard.vice.com/en_us/article/9aebw7/teaching-machines-to-detect-fake-news-is-really-hard>https://motherboard.vice.com/en_us/article/9aebw7/teaching-machines-to-detect-fake-news-is-really-hard</a>.
+[Accessed: 23-Apr-2019]</p><p>[7] C. Silverman, “In spite of its efforts, facebook is still the home
+of hugely viral fake news,” <em>BuzzFeed News</em>. BuzzFeed News, Dec-2018
+[Online]. Available:
+<a href=https://www.buzzfeednews.com/article/craigsilverman/facebook-fake-news-hits-2018>https://www.buzzfeednews.com/article/craigsilverman/facebook-fake-news-hits-2018</a>.
+[Accessed: 23-Apr-2019]</p><p>[8] C. Domonoske, “Students have ’dismaying’ inability to tell fake
+news from real, study finds,” <em>NPR</em>. NPR, Nov-2016 [Online].
+Available:
+<a href=https://www.npr.org/sections/thetwo-way/2016/11/23/503129818/study-finds-students-have-dismaying-inability-to-tell-fake-news-from-real>https://www.npr.org/sections/thetwo-way/2016/11/23/503129818/study-finds-students-have-dismaying-inability-to-tell-fake-news-from-real</a></p><p>[9] “Fake news challenge stage 1 (fnc-i): Stance detection,” <em>Fake
+News Challenge</em>. [Online]. Available:
+<a href=http://www.fakenewschallenge.org/>http://www.fakenewschallenge.org/</a>. [Accessed: 23-Apr-2019]</p><p>[10] R. Matheson and M. N. Office, “Peering under the hood of
+fake-news detectors,” <em>MIT News</em>. Feb-2019 [Online]. Available:
+<a href=http://news.mit.edu/2019/opening-machine-learning-black-box-fake-news-0206>http://news.mit.edu/2019/opening-machine-learning-black-box-fake-news-0206</a>.
+[Accessed: 23-Apr-2019]</p><p>[11] G. E. Nicole O’Brien Sophia Latessa and X. Boix, “The language of
+fake news: Opening the black-box of deep learning based detectors.”
+Center for Brains, Minds; Machines (CBMM), Montreal, Canada, Nov-2018
+[Online]. Available: <a href=http://hdl.handle.net/1721.1/120056>http://hdl.handle.net/1721.1/120056</a>.
+[Accessed: 23-Apr-2019]</p><p>[12] N. J. Conroy, V. L. Rubin, and Y. Chen, “Automatic deception
+detection: Methods for finding fake news,” <em>Proceedings of the
+Association for Information Science and Technology</em>, vol. 52, no. 1, pp.
+1–4, 2015.</p><p>[13] W. Y. Wang, “”Liar, liar pants on fire”: A new benchmark dataset
+for fake news detection,” <em>arXiv preprint arXiv:1705.006-48</em>, 2017.</p><p>[14] A. Roy, K. Basak, A. Ekbal, and P. Bhattacharyya, “A deep
+ensemble framework for fake news detection and classification,” <em>arXiv
+preprint arXiv:1811.04670</em>, 2018.</p><p>[15] F. C. Fernández-Reyes and S. Shinde, “Evaluating deep neural
+networks for automatic fake news detection in political domain,” in
+<em>Proceedings of the ibero-american conference on artificial
+intelligence</em>, 2018, pp. 206–216.</p><p>[16] P. T. Tin, “A study on deep learning for fake news detection,”
+Master’s thesis, Japan Advanced Institute of Science; Technology
+Information Science, Nomi, Ishikawa, Japan, 2018.</p><p>[17] Q. Zeng, Q. Zhou, and S. Xu, “Neural stance detectors for fake
+news challenge.”.</p><p>[18] R. Davis and C. Proctor, “Fake news, real consequences:
+Recruiting neural networks for the fight against fake news.”.</p><p>[19] A. Thota, P. Tilak, S. Ahluwalia, and N. Lohia, “Fake news
+detection: A deep learning approach,” <em>SMU Data Science Review</em>, vol. 1,
+no. 3, p. 10, 2018.</p><p>[20] S. Baird, “Talos targets disinformation with fake news challenge
+victory,” <em>Talos Blog || Cisco Talos Intelligence Group - Comprehensive
+Threat Intelligence: Talos Targets Disinformation with Fake News
+Challenge Victory</em>. Jun-2017 [Online]. Available:
+<a href=https://blog.talosintelligence.com/2017/06/talos-fake-news-challenge.html>https://blog.talosintelligence.com/2017/06/talos-fake-news-challenge.html</a>.
+[Accessed: 23-Apr-2019]</p><p>[21] F. Cardoso Durier da Silva, R. Vieira, and A. C. Garcia, “Can
+machines learn to detect fake news? A survey focused on social media,”
+in <em>Proceedings of the 52nd hawaii international conference on system
+sciences</em>, 2019.</p></div><div class="text-neutral-500 mb-4">Last modified <span itemprop=dateModified datetime=2019-12-06T14:21:12-0400 content="2019-12-06T14:21:12-0400">2019.12.06</span></div></article></main><footer class="footer container h-10 text-center mt-1"><hr class=my-4><ul class="pl-0 mt-1"><li class="ml-2 first:before:content-none before:content-['•']
+inline-block list-none">Made with ❤️ in Davis</li><li class="ml-2 first:before:content-none before:content-['•']
+text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class=ml-2>© Claudio Spiess 2023</span></li></ul></footer></body></html>

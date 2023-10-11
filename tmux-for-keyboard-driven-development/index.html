@@ -1,0 +1,131 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1"><title>Tmux for keyboard driven development - Claudio Spiess</title><meta property="og:title" content="Tmux for keyboard driven development - Claudio Spiess"><meta property="og:type" content="article"><meta property="og:image" content="img/profile.jpg"><meta property="og:url" content="https://claudiosv.github.io/blog/tmux-for-keyboard-driven-development/"><meta property="og:description" content="TEST"><meta name=Description property="description" content="TEST"><link rel=stylesheet href=https://claudiosv.github.io/blog/css/style.min.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/svg+xml href=/favicon.svg><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link href=https://claudiosv.github.io/blog/index.xml type=application/atom+xml rel=alternate title="Sitewide Atom feed"><meta name=theme-color content="#ffffff"><script>function updateMode(){localStorage.theme==="dark"||!("theme"in localStorage)&&window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.classList.add("dark"):document.documentElement.classList.remove("dark")}function toggleMode(){localStorage.theme==="dark"?localStorage.theme="light":localStorage.theme="dark",updateMode()}window.onload=updateMode();function toggleMenu(){let e=document.getElementById("navbar-default");e.classList.contains("hidden")?e.classList.remove("hidden"):e.classList.add("hidden")}</script></head><body><header class="md:px-0 px-2"><nav><div class="container flex flex-wrap justify-between items-center mx-auto"><div class="nav-main my-2.5"></div><button type=button onclick=toggleMenu() class="inline-flex items-center p-2 ml-3
+text-sm text-gray-500
+rounded-lg md:hidden hover:bg-gray-100
+focus:outline-none focus:ring-2
+focus:ring-gray-200 dark:text-gray-400
+dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls=navbar-default aria-expanded=false>
+<span class=sr-only>Open main menu</span><svg class="w-6 h-6" aria-hidden="true" fill="currentcolor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4A1 1 0 013 5zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg></button><div class="hidden w-full md:block md:w-auto" id=navbar-default><ul class="grid md:grid-flow-col items-center justify-between text-lg my-2.5"><li class="p-2.5 md:first:pl-0 md:border-none border-b dark:border-zinc-500 list-none"><a class="text-zinc-600 dark:text-zinc-300
+hover:border-b-0" href=/blog/>Home</a></li><li class="p-2.5 md:first:pl-0 md:border-none border-b dark:border-zinc-500 list-none"><a class="text-zinc-600 dark:text-zinc-300
+hover:border-b-0" href=/blog/post/>Posts</a></li><li class="h-7 pl-2.5 pr-0 list-none"><button type=button onclick=toggleMode() class=h-full aria-label="Toggle between dark and light mode">
+<img class="h-7 w-7 max-h-full mb-1.5 p-1.5 hidden dark:inline" id=ligh-mode-button-img alt="A sun icon for switching to light mode" src=https://claudiosv.github.io/blog/img/light_mode.svg>
+<img class="h-7 w-7 max-h-full mb-1.5 p-1.5 inline dark:hidden" id=dark-mode-button-img alt="A moon icon for switching to dark mode" src=https://claudiosv.github.io/blog/img/dark_mode.svg></button></li></ul></div></div></nav></header><main class="content h-card container mt-2 m-auto
+leading-loose md:px-0 px-2 z-0" role=main><article class="article h-entry" itemprop=mainEntity itemscope itemtype=http://schema.org/BlogPosting><div class=title-container><h1 class="article-title p-name" itemprop=name>Tmux for keyboard driven development</h1><div class="flex justify-between items-center"><a class="text-lg text-gray-600 dark:text-gray-400 border-none u-url" href=https://claudiosv.github.io/blog/tmux-for-keyboard-driven-development/><time itemprop=datePublished class=dt-published datetime=2021-08-02T00:00:00Z content="2021-08-02T00:00:00Z">2021.08.02</time></a>
+<a class="text-gray-600 dark:text-gray-400 text-right border-none p-author h-card" rel=author href=https://claudiosv.github.io/blog/ itemprop=author itemscope itemtype=http://schema.org/Person><span itemprop=name>Claudio Spiess</span></a></div></div><div class="article-content e-content" itemprop=articleBody><p>Keyboard driven development means using your keyboard as much as possible while programming, avoiding the use of mouse or touchpad. The advantages include being much faster and showing off your unix foo, and being more ergonomic, since repeatedly moving your hand from keyboard to mouse is a waste of time that will eventually give you a repetitive strain injury.</p><p>This post serves as a cheatsheet for myself, in case to need to review one of the less used keyboard shortcuts. A lot of people like to bind their prefix to the caps lock key, but I already use that to activate my Karabiner layer (to be explained in another post).</p><h3 id=tmux-uses-a-prefix-before-accepting-commands-lets-change-it>Tmux uses a prefix before accepting commands, let&rsquo;s change it</h3><pre tabindex=0><code># Set the prefix from Ctrl-b to Ctrl-a
+set -g prefix C-a
+
+# Free original Ctrl-b prefix keybinding
+unbind C-b
+
+# Open config file with Prefix-e
+bind e new-window -n &#34;~/.config/tmux/tmux.conf&#34; &#34;nvim ~/.config/tmux/tmux.conf &amp;&amp; tmux source ~/.config/tmux/tmux.conf &amp;&amp; tmux display \&#34;Reloaded tmux.conf\&#34;&#34;
+
+# Reload the config file with Prefix-r
+bind r source-file ~/.config/tmux/tmux.conf \; display &#34;Reloaded tmux.conf&#34;
+</code></pre><h3 id=splitting-panes>Splitting panes</h3><pre tabindex=0><code># Prefix-c new window
+bind c new-window -c &#34;#{pane_current_path}&#34;
+# Prefix-| split vertically
+bind | split-window -h -c &#34;#{pane_current_path}&#34;
+# Prefix-- split horizontally
+bind - split-window -v -c &#34;#{pane_current_path}&#34;
+</code></pre><h3 id=moving-between-panes-using-vim-keys>Moving between panes using vim keys</h3><pre tabindex=0><code># Prefix-h left
+bind h select-pane -L
+# Prefix-j down
+bind j select-pane -D
+# Prefix-k up
+bind k select-pane -U
+# Prefix-l right
+bind l select-pane -R
+</code></pre><h3 id=pane-resizing>Pane resizing</h3><pre tabindex=0><code># Prefix-H left
+bind -r H resize-pane -L 5
+# Prefix-J down
+bind -r J resize-pane -D 5
+# Prefix-K up
+bind -r K resize-pane -U 5
+# Prefix-L right
+bind -r L resize-pane -R 5
+</code></pre><h3 id=window-navigation>Window navigation</h3><pre tabindex=0><code># We use hjkl for panes and Ctrl-hjkl for windows, so let&#39;s remove the default
+unbind n
+unbind p
+# Prefix then Ctrl-h switches to previous window
+bind -r C-h previous-window
+# Prefix then Ctrl-l switches to next window
+bind -r C-l next-window
+# Prefix then Tab switches to last active window
+bind Tab last-window
+</code></pre><h3 id=copying--session-management>Copying & session management</h3><pre tabindex=0><code># Prefix-y copies the tmux buffer into the macOS clipboard
+bind y run -b &#34;tmux save-buffer - | reattach-to-user-namespace pbcopy&#34;
+
+# Prefix-b list paste buffers
+bind b list-buffers
+# Prefix-p paste from the top paste buffer
+bind p paste-buffer
+# Prefix-Ctrl-P choose which buffer to paste from
+bind P choose-buffer
+
+# Find session (only really handy if you name your sessions)
+bind C-f command-prompt -p find-session &#39;switch-client -t %%&#39;
+</code></pre><h3 id=default-keybindings>Default keybindings</h3><pre tabindex=0><code>C-o         Rotate the panes in the current window forwards.
+C-z         Suspend the tmux client.
+!           Break the current pane out of the window.
+&#34;           Split the current pane into two, top and bottom.
+#           List all paste buffers.
+$           Rename the current session.
+%           Split the current pane into two, left and right.
+&amp;           Kill the current window.
+&#39;           Prompt for a window index to select.
+(           Switch the attached client to the previous
+            session.
+)           Switch the attached client to the next session.
+,           Rename the current window.
+-           Delete the most recently copied buffer of text.
+.           Prompt for an index to move the current window.
+0 to 9      Select windows 0 to 9.
+:           Enter the tmux command prompt.
+;           Move to the previously active pane.
+=           Choose which buffer to paste interactively from a
+            list.
+?           List all key bindings.
+D           Choose a client to detach.
+L           Switch the attached client back to the last
+            session.
+c           Create a new window.
+d           Detach the current client.
+f           Prompt to search for text in open windows.
+i           Display some information about the current
+            window.
+l           Move to the previously selected window.
+m           Mark the current pane (see select-pane -m).
+M           Clear the marked pane.
+n           Change to the next window.
+o           Select the next pane in the current window.
+p           Change to the previous window.
+q           Briefly display pane indexes.
+r           Force redraw of the attached client.
+s           Select a new session for the attached client
+            interactively.
+t           Show the time.
+w           Choose the current window interactively.
+x           Kill the current pane.
+z           Toggle zoom state of the current pane.
+{           Swap the current pane with the previous pane.
+}           Swap the current pane with the next pane.
+~           Show previous messages from tmux, if any.
+M-1 to M-5  Arrange panes in one of the five preset layouts:
+            even-horizontal, even-vertical, main-horizontal,
+            main-vertical, or tiled.
+Space       Arrange the current window in the next preset
+            layout.
+M-n         Move to the next window with a bell or activity
+            marker.
+M-o         Rotate the panes in the current window backwards.
+M-p         Move to the previous window with a bell or
+            activity marker.
+C-Up, C-Down
+C-Left, C-Right
+            Resize the current pane in steps of one cell.
+M-Up, M-Down
+M-Left, M-Right
+            Resize the current pane in steps of five cells.
+</code></pre></div><div class="text-neutral-500 mb-4">Last modified <span itemprop=dateModified datetime=2021-08-02T00:00:00Z content="2021-08-02T00:00:00Z">2021.08.02</span></div></article></main><footer class="footer container h-10 text-center mt-1"><hr class=my-4><ul class="pl-0 mt-1"><li class="ml-2 first:before:content-none before:content-['•']
+inline-block list-none">Made with ❤️ in Davis</li><li class="ml-2 first:before:content-none before:content-['•']
+text-neutral-800 dark:text-neutral-400 inline-block list-none"><span class=ml-2>© Claudio Spiess 2023</span></li></ul></footer></body></html>
