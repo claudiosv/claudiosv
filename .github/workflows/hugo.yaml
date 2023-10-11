@@ -35,10 +35,11 @@ jobs:
       url: "https://claudiosv.github.io/"
     runs-on: ubuntu-latest
     steps:
+      - run: ls
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: "public/"
+          path: "./public/"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
