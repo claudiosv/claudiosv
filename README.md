@@ -1,6 +1,6 @@
 ## 👋  &nbsp; Hey there, I'm Claudio Spiess
 
-I'm a PhD student in Computer Science at the University of California, Davis. My work revolves arround applying machine learning techniques, especially from the natural language processing community, to software engineering problems.
+I'm a PhD candidate in Computer Science at the University of California, Davis. My work revolves arround applying machine learning techniques, especially from the natural language processing community, to software engineering problems.
 
 :brain: &nbsp; **Expertise**: Machine Learning, Data Science, Python, ML4SE, AI4Code
 
