@@ -31,7 +31,7 @@ I'm a PhD candidate in Computer Science at the University of California, Davis. 
 
 :hammer_and_wrench: &nbsp; **Skills**
 
-* **skills**: &nbsp; Python, Ruby, C, SQL (Postgres), Java, TypeScript
-* **skills**: &nbsp; PyTorch, Tensorflow, Flask/FastAPI, Rails, React, Node.js
-* **skills**: &nbsp; Git, Docker, Terraform, AWS, CircleCI, VS Code
-* **skills**: &nbsp; pandas, NumPy, Huggingface, Matplotlib, plotly
+* **Programming Languages**: &nbsp; Python, Ruby, C, SQL (Postgres), Java, TypeScript
+* **Frameworks**: &nbsp; PyTorch, Tensorflow, Flask/FastAPI, Rails, React, Node.js
+* **Developer Tools**: &nbsp; Git, Docker, Terraform, AWS, CircleCI, VS Code
+* **Libraries**: &nbsp; pandas, NumPy, Huggingface, Matplotlib, plotly
