@@ -29,6 +29,7 @@ I'm a PhD candidate in Computer Science at the University of California, Davis. 
   * Created system for monitoring ML model outputs & explaining decisions to non-technical stakeholders e.g. through the use of SHAP.
   * Developed features & improvements on Ruby on Rails and React/TypeScript apps that managed over €185 million euros in outgoing loans at one of the Netherland's fastest growing startups with over €78 million in funding
 
+
 :hammer_and_wrench: &nbsp; **Skills**
 
 * **Programming Languages**: &nbsp; Python, Ruby, C, SQL (Postgres), Java, TypeScript
